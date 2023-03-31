@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/**
+ * main - Entry point
+ * Program that displays a singly linked list
+ * Return 0
+ */
+
+struct node
+{
+	int num;
+	struct node *next;
+}*stnode;
+
+void createNodeList(int n);
+void displayList();
+
+int main(void)
+{
+	int n;
+
+	printf("\n\n Linked List : To create and display Singly Linked List :\n");
+	printf("-------------------------------------------------------------\n");
+
+	printf("Input the number of nodes : ");
+	scanf("%d", &n);
+	createNodeList(n);
+	printf("\n Data entered in the list : \n");
+        displayList();
+	return (0);
+}
+
+void createNodeList(int n)
+{
+	struct node *fnNode, *tmp;
+	int num, i;
+
+	stnode = (struct node*)malloc(sizeof(struct node));
+
+	if (stnode == NULL)
+	{
+		printf("Memory cannot be allocated.");
+	}
+	else
+	{
+		printf("Input data for node 1: ");
+		scanf("%d", &num);
+		stnode->num = num;
+		stnode->next = NULL;
+		tmp = stnode;
+
+		for(i = 2; i <= n; i++)
+		{
+			fnNode = (struct node*)malloc(sizeof(struct node));
+			if(fnNode == NULL)
+			{
+				printf("Memory cannot be allocated.");
+			}
+			else
+			{
+				printf(" Input data for node %d : ", i);
+				scanf(" %d", &num);
+				fnNode->num = num;
+				fnNode->next = NULL;
+
+				tmp->next = fnNode;
+				tmp = tmp->next;
+			}
+		}
+	}
+}
+void displayList()
+{
+	struct node *tmp;
+	if(stnode ==  NULL)
+	{
+		printf(" List is empty.");
+	}
+	else
+	{
+		tmp = stnode;
+		while(tmp != NULL)
+		{
+			printf(" Data = %d\n", tmp->num);
+			tmp = tmp->next;
+		}
+	}
+}
+	
